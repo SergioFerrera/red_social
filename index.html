@@ -42,6 +42,7 @@
         </nav>
     </div>
 
+    <!-- Presentation & Register Form -->
     <div class="container">
         <div class="row mt-5">
             <!-- Presentation -->
@@ -52,6 +53,66 @@
                     informática.</p>
                 <p>Curso: 2019-2020</p>
                 <img src="img/ull_logo.svg" alt="">
+            </div>
+            <!-- Register Form -->
+            <div class="col-lg">
+                <h4>Registrate</h4>
+                <p></p>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-lg">
+                            <input type="text" class="form-control" placeholder="Nombre" aria-label="name" id="name"
+                                required>
+                        </div>
+                        <div class="form-group col-lg">
+                            <input type="text" class="form-control" placeholder="Apellidos" aria-label="surname"
+                                id="surname" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg">
+                            <input class="form-control" type="email" placeholder="Email" aria-label="email_register"
+                                id="email_register"
+                                pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg">
+                            <input class="form-control" type="password" placeholder="Contraseña"
+                                aria-label="password_register" id="pass_register" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg">
+                            <input class="form-control" type="date" aria-label="birthdate" id="birthdate" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg">
+                            <label for="sexo_input" aria-label="sexo">Sexo</label>
+                            <div id="sexo_input">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="sexo" aria-label="mujer" id="mujer" value="mujer" required>
+                                    <label class="form-check-label" for="mujer">Mujer</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="sexo" aria-label="hombre" id="hombre" value="hombre" required>
+                                    <label class="form-check-label" for="hombre">Hombre</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="sexo" aria-label="otro" id="otro" value="otro" required>
+                                    <label class="form-check-label" for="otro">Otro</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg">
+                            <button class="btn btn-dark" type="submit">Registrarse</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
