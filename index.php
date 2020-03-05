@@ -33,6 +33,31 @@ require_once('config.php');
                     class="d-inline-block align-top" alt="">
                 Red Social
             </a>
+            <!-- PHP code for check data on database -->
+            <?php
+                if(isset($_POST['login'])){
+                    $email = $_POST['email_login'];
+                    $password = $_POST['pass_login'];
+
+                    $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+                    $stmselect = $db->prepare($sql);
+                    $result = $stmselect->execute([$email, $password]);
+
+                    if($result){
+                        $user = $stmselect->fetch(PDO::FETCH_ASSOC);
+                        if($stmselect->rowCount()>0){
+                            header("Location: ./logged_in.php");
+                            exit();
+                        }
+                        else{
+                            echo '<div class="alert alert-danger" role="alert">No existe ese email y contraseña en la base de datos.</div>';
+                        }
+                    }
+                    else{
+                        echo '<div class="alert alert-danger" role="alert">Ha habido un error durante el inicio de sesión.</div>';
+                    }
+                }
+            ?>
             <!-- Login Form -->
             <form action="index.php" method="post" class="form-inline ml-auto">
                 <!-- Pattern is a regular expression for email input -->
