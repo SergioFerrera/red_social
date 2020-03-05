@@ -49,6 +49,28 @@ require_once('config.php');
 
     <!-- Presentation & Register Form -->
     <div class="container">
+        <!-- PHP code for insert data to database -->
+        <?php
+            if(isset($_POST['create'])){
+                $name = $_POST['name'];
+                $surname = $_POST['surname'];
+                $email = $_POST['email_register'];
+                $password = $_POST['pass_register'];
+                $birthdate = $_POST['birthdate'];
+                $sexo = $_POST['sexo'];
+                
+                $sql = "INSERT INTO users (name, surname, email, password, birthdate, sexo) VALUES(?,?,?,?,?,?)";
+                $stmtinsert = $db->prepare($sql);
+                $result = $stmtinsert->execute([$name, $surname, $email, $password, $birthdate, $sexo]);
+
+                if($result){
+                    echo '<div class="alert alert-success" role="alert">Has sido registrado correctamente '  . $name . '.</div>';
+                }
+                else{
+                    echo '<div class="alert alert-danger" role="alert">Ha habido un error durante el registro.</div>';
+                }
+            }
+        ?>
         <div class="row mt-5">
             <!-- Presentation -->
             <div class="col-lg">
