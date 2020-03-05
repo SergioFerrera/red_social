@@ -29,15 +29,15 @@
                 Red Social
             </a>
             <!-- Login Form -->
-            <form class="form-inline ml-auto">
+            <form action="index.php" method="post" class="form-inline ml-auto">
                 <!-- Pattern is a regular expression for email input -->
                 <input class="form-control mr-sm-2" type="email" placeholder="Email" aria-label="email_login"
-                    id="email_login"
+                    name="email_login"
                     pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
                     required>
                 <input class="form-control mr-sm-2" type="password" placeholder="Contraseña" aria-label="password_login"
-                    id="pass_login" required>
-                <button class="btn btn-dark my-2 my-sm-0" type="submit">Entrar</button>
+                    name="pass_login" required>
+                <button class="btn btn-dark my-2 my-sm-0" type="submit" name="login">Entrar</button>
             </form>
         </nav>
     </div>
@@ -58,21 +58,21 @@
             <div class="col-lg">
                 <h4>Registrate</h4>
                 <p></p>
-                <form>
+                <form action="index.php" method="post">
                     <div class="form-row">
                         <div class="form-group col-lg">
-                            <input type="text" class="form-control" placeholder="Nombre" aria-label="name" id="name"
+                            <input type="text" class="form-control" placeholder="Nombre" aria-label="name" name="name"
                                 required>
                         </div>
                         <div class="form-group col-lg">
                             <input type="text" class="form-control" placeholder="Apellidos" aria-label="surname"
-                                id="surname" required>
+                                name="surname" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-lg">
                             <input class="form-control" type="email" placeholder="Email" aria-label="email_register"
-                                id="email_register"
+                                name="email_register"
                                 pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
                                 required>
                         </div>
@@ -80,30 +80,30 @@
                     <div class="form-row">
                         <div class="form-group col-lg">
                             <input class="form-control" type="password" placeholder="Contraseña"
-                                aria-label="password_register" id="pass_register" required>
+                                aria-label="password_register" name="pass_register" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-lg">
-                            <input class="form-control" type="date" aria-label="birthdate" id="birthdate" required>
+                            <input class="form-control" type="date" aria-label="birthdate" name="birthdate" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-lg">
                             <label for="sexo_input" aria-label="sexo">Sexo</label>
-                            <div id="sexo_input">
+                            <div name="sexo_input">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="sexo" aria-label="mujer"
-                                        id="mujer" value="mujer" required>
+                                        name="mujer" value="mujer" required>
                                     <label class="form-check-label" for="mujer">Mujer</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="sexo" aria-label="hombre"
-                                        id="hombre" value="hombre" required>
+                                        name="hombre" value="hombre" required>
                                     <label class="form-check-label" for="hombre">Hombre</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="sexo" aria-label="otro" id="otro"
+                                    <input class="form-check-input" type="radio" name="sexo" aria-label="otro" name="otro"
                                         value="otro" required>
                                     <label class="form-check-label" for="otro">Otro</label>
                                 </div>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-lg">
-                            <button class="btn btn-dark" type="submit">Registrarse</button>
+                            <button class="btn btn-dark" type="submit" name="create">Registrarse</button>
                         </div>
                     </div>
                 </form>
