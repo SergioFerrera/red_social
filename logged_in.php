@@ -24,7 +24,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f37b0a;">
             <!-- Logo -->
-            <a class="navbar-brand" href="https://sergioferrera.github.io/red_social/"><img src="img/social_icon.svg" width="30" height="30"
+            <a class="navbar-brand" href="/"><img src="img/social_icon.svg" width="30" height="30"
                     class="d-inline-block align-top" alt="">
                 Red Social
             </a>
