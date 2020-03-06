@@ -38,6 +38,18 @@
             <div class="col-lg">
                 <h2>Perfil</h2>
                 <p></p>
+                <?php
+                    $name=$_GET['name'];
+                    $surname=$_GET['surname'];
+                    $email=$_GET['email'];
+                    $birthdate=$_GET['birthdate'];
+                    $sexo=$_GET['sexo'];
+                    echo '<p><strong>Nombre:</strong> '.$name.'</p>';
+                    echo '<p><strong>Apellidos:</strong> '.$surname.'</p>';
+                    echo '<p><strong>Email:</strong> '.$email.'</p>';
+                    echo '<p><strong>Fecha de nacimiento:</strong> '.$birthdate.'</p>';
+                    echo '<p><strong>Sexo:</strong> '.$sexo.'</p>';
+                ?>
             </div>
             <!-- Register Form -->
             <div class="col-lg">
