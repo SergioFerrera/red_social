@@ -38,10 +38,18 @@
             <div class="col-lg">
                 <h5>Red Social para el Máster en Formación del Profesorado</h5>
                 <p></p>
-                <p>Esta red social ha sido desarrollada como trabajo para la asignatura de Aprendizaje y enseñanza de la
-                    informática.</p>
-                <p>Curso: 2019-2020</p>
-                <img src="img/ull_logo.svg" alt="">
+                <?php
+                    $name=$_GET['name'];
+                    $surname=$_GET['surname'];
+                    $email=$_GET['email'];
+                    $birthdate=$_GET['birthdate'];
+                    $sexo=$_GET['sexo'];
+                    echo '<p><strong>Nombre:</strong> '.$name.'</p>';
+                    echo '<p><strong>Apellidos:</strong> '.$surname.'</p>';
+                    echo '<p><strong>Email:</strong> '.$email.'</p>';
+                    echo '<p><strong>Fecha de nacimiento:</strong> '.$birthdate.'</p>';
+                    echo '<p><strong>Sexo:</strong> '.$sexo.'</p>';
+                ?>
             </div>
             <!-- Register Form -->
             <div class="col-lg">
