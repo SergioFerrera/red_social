@@ -39,14 +39,14 @@ require_once('config.php');
                     $email = $_POST['email_login'];
                     $password = $_POST['pass_login'];
 
-                    $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+                    $sql = "SELECT id, name, surname, email, birthdate, sexo FROM users WHERE email = ? AND password = ?";
                     $stmselect = $db->prepare($sql);
                     $result = $stmselect->execute([$email, $password]);
 
                     if($result){
                         $user = $stmselect->fetch(PDO::FETCH_ASSOC);
                         if($stmselect->rowCount()>0){
-                            header("Location: ./logged_in.php");
+                            header("Location: ./logged_in.php?user=".http_build_query($user));
                             exit();
                         }
                         else{
