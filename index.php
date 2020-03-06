@@ -137,6 +137,7 @@ require_once('config.php');
                     </div>
                     <div class="form-row">
                         <div class="form-group col-lg">
+                            <label for="birthdate">Fecha de nacimiento:</label>
                             <input class="form-control" type="date" aria-label="birthdate" name="birthdate" required>
                         </div>
                     </div>
