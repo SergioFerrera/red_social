@@ -36,16 +36,12 @@
         <div class="row mt-5">
             <!-- Presentation -->
             <div class="col-lg">
-                <h5>Red Social para el Máster en Formación del Profesorado</h5>
+                <h2>Perfil</h2>
                 <p></p>
-                <p>Esta red social ha sido desarrollada como trabajo para la asignatura de Aprendizaje y enseñanza de la
-                    informática.</p>
-                <p>Curso: 2019-2020</p>
-                <img src="img/ull_logo.svg" alt="">
             </div>
             <!-- Register Form -->
             <div class="col-lg">
-                <h4>Publicaciones</h4>
+                <h2>Publicaciones</h2>
                 <p></p>
             </div>
         </div>
