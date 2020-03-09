@@ -70,6 +70,24 @@ $following=json_decode(base64_decode($_SESSION['following']));
                         echo '</p>';
                     }
                 ?>
+                    <?php
+                        $sql = "SELECT id, name FROM users WHERE email != ?";
+                        $stmselect = $db->prepare($sql);
+                        $result = $stmselect->execute([$email]);
+                        if($result){
+                            if($stmselect->rowCount()>0){
+                                while ($row = $stmselect->fetch(PDO::FETCH_ASSOC)){
+                                    echo '<option>'.$row["name"].'</option>';
+                                }
+                            }
+                            else{
+                                echo '<option>No existen más usuarios en la red social.</option>';
+                            }
+                        }
+                        else{
+                            echo '<option>Ha habido un error durante la carga.</option>';
+                        }
+                    ?>
                 ?>
             </div>
             <!-- Register Form -->
