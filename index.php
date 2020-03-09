@@ -1,6 +1,7 @@
-<!-- Database Configuration File -->
+<!-- Database Configuration File & Session Start -->
 <?php
 require_once('config.php');
+session_start();
 ?>
 
 <!doctype html>
@@ -45,8 +46,14 @@ require_once('config.php');
 
                     if($result){
                         $user = $stmselect->fetch(PDO::FETCH_ASSOC);
+                        // Putting data from user database to Session variables
+                        $_SESSION['name']=$user['name'];
+                        $_SESSION['surname']=$user['surname'];
+                        $_SESSION['email']=$user['email'];
+                        $_SESSION['birthdate']=$user['birthdate'];
+                        $_SESSION['sexo']=$user['sexo'];
                         if($stmselect->rowCount()>0){
-                            header("Location: ./logged_in.php?user=".http_build_query($user));
+                            header("Location: ./logged_in.php");
                             exit();
                         }
                         else{
