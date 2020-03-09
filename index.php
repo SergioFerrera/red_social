@@ -1,6 +1,7 @@
-<!-- Database Configuration File -->
+<!-- Database Configuration File & Session Start -->
 <?php
 require_once('config.php');
+session_start();
 ?>
 
 <!doctype html>
@@ -44,6 +45,13 @@ require_once('config.php');
 
                     if($result){
                         $user = $stmselect->fetch(PDO::FETCH_ASSOC);
+                        // Putting data from user database to Session variables
+                        $_SESSION['name']=$user['name'];
+                        $_SESSION['surname']=$user['surname'];
+                        $_SESSION['email']=$user['email'];
+                        $_SESSION['birthdate']=$user['birthdate'];
+                        $_SESSION['sexo']=$user['sexo'];
+                        $_SESSION['following']=$user['following'];
                         if($stmselect->rowCount()>0){
                             header("Location: ./logged_in.php");
                             exit();
@@ -82,10 +90,10 @@ require_once('config.php');
                 $password = $_POST['pass_register'];
                 $birthdate = $_POST['birthdate'];
                 $sexo = $_POST['sexo'];
-                
-                $sql = "INSERT INTO users (name, surname, email, password, birthdate, sexo) VALUES(?,?,?,?,?,?)";
+                $following = '';
+                $sql = "INSERT INTO users (name, surname, email, password, birthdate, sexo, following) VALUES(?,?,?,?,?,?,?)";
                 $stmtinsert = $db->prepare($sql);
-                $result = $stmtinsert->execute([$name, $surname, $email, $password, $birthdate, $sexo]);
+                $result = $stmtinsert->execute([$name, $surname, $email, $password, $birthdate, $sexo, $following]);
 
                 if($result){
                     echo '<div class="alert alert-success" role="alert">Has sido registrado correctamente '  . $name . '.</div>';

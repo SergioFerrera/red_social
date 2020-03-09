@@ -1,3 +1,14 @@
+<!-- Database Configuration File -->
+<?php
+session_start();
+require_once('config.php');
+$name=$_SESSION['name'];
+$surname=$_SESSION['surname'];
+$email=$_SESSION['email'];
+$birthdate=$_SESSION['birthdate'];
+$sexo=$_SESSION['sexo'];
+$following=json_decode(base64_decode($_SESSION['following']));
+?>
 <!doctype html>
 
 <html lang="es">
@@ -38,6 +49,61 @@
             <div class="col-lg">
                 <h2>Perfil</h2>
                 <p></p>
+                <?php
+                    echo '<p><strong>Nombre:</strong> '.$name.'</p>';
+                    echo '<p><strong>Apellidos:</strong> '.$surname.'</p>';
+                    echo '<p><strong>Email:</strong> '.$email.'</p>';
+                    echo '<p><strong>Fecha de nacimiento:</strong> '.$birthdate.'</p>';
+                    echo '<p><strong>Sexo:</strong> '.$sexo.'</p>';
+                    echo '<p><strong>Siguiendo:</strong> ';
+                    if (count($following) > 1){
+                        foreach ($following as $i=>$v) {
+                            if ($i<count($following)-1)
+                                echo $v. ', ';
+                            else
+                                echo $v;
+                        }
+                        echo '</p>';
+                    }
+                    elseif (count($following) == 1){
+                        echo $following[0];
+                        echo '</p>';
+                    }
+                ?>
+                    <?php
+                        $sql = "SELECT id, name FROM users WHERE email != ?";
+                        $stmselect = $db->prepare($sql);
+                        $result = $stmselect->execute([$email]);
+                        if($result){
+                            if($stmselect->rowCount()>0){
+                                while ($row = $stmselect->fetch(PDO::FETCH_ASSOC)){
+                                    echo '<option>'.$row["name"].'</option>';
+                                }
+                            }
+                            else{
+                                echo '<option>No existen más usuarios en la red social.</option>';
+                            }
+                        }
+                        else{
+                            echo '<option>Ha habido un error durante la carga.</option>';
+                        }
+                    ?>
+                <?php
+                    if(isset($_POST['follow'])){
+                        $array = $_POST['followings'];
+                        $array_json = json_encode($array);
+                        $array_base64 = base64_encode($array_json);
+                        $sql = "UPDATE users SET following = ? WHERE email = ?";
+                        $stmtinsert = $db->prepare($sql);
+                        $result = $stmtinsert->execute([$array_base64, $email]);
+                        if($result){
+                            echo '<div class="alert alert-success" role="alert">Se han añadido los seguidores correctamente.</div>';
+                        }
+                        else{
+                            echo '<div class="alert alert-danger" role="alert">Ha habido un error durante la adición de los seguidores.</div>';
+                        }
+                    }
+                ?>
             </div>
             <!-- Register Form -->
             <div class="col-lg">
