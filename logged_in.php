@@ -70,6 +70,10 @@ $following=json_decode(base64_decode($_SESSION['following']));
                         echo '</p>';
                     }
                 ?>
+                <form action="logged_in.php" method="post">
+                    <div class="form-group">
+                    <label for="followings">Sigue a gente!:</label>
+                    <select name="followings[]" multiple class="form-control" required>
                     <?php
                         $sql = "SELECT id, name FROM users WHERE email != ?";
                         $stmselect = $db->prepare($sql);
@@ -88,6 +92,12 @@ $following=json_decode(base64_decode($_SESSION['following']));
                             echo '<option>Ha habido un error durante la carga.</option>';
                         }
                     ?>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-dark" type="submit" name="follow">Seguir!</button>
+                    </div>
+                </form>
                 <?php
                     if(isset($_POST['follow'])){
                         $array = $_POST['followings'];
