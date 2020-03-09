@@ -38,8 +38,7 @@ require_once('config.php');
                 if(isset($_POST['login'])){
                     $email = $_POST['email_login'];
                     $password = $_POST['pass_login'];
-
-                    $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+                    $sql = "SELECT id, name, surname, email, birthdate, sexo, following FROM users WHERE email = ? AND password = ?";
                     $stmselect = $db->prepare($sql);
                     $result = $stmselect->execute([$email, $password]);
 
