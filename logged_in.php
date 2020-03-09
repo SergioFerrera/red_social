@@ -88,6 +88,21 @@ $following=json_decode(base64_decode($_SESSION['following']));
                             echo '<option>Ha habido un error durante la carga.</option>';
                         }
                     ?>
+                <?php
+                    if(isset($_POST['follow'])){
+                        $array = $_POST['followings'];
+                        $array_json = json_encode($array);
+                        $array_base64 = base64_encode($array_json);
+                        $sql = "UPDATE users SET following = ? WHERE email = ?";
+                        $stmtinsert = $db->prepare($sql);
+                        $result = $stmtinsert->execute([$array_base64, $email]);
+                        if($result){
+                            echo '<div class="alert alert-success" role="alert">Se han añadido los seguidores correctamente.</div>';
+                        }
+                        else{
+                            echo '<div class="alert alert-danger" role="alert">Ha habido un error durante la adición de los seguidores.</div>';
+                        }
+                    }
                 ?>
             </div>
             <!-- Register Form -->
