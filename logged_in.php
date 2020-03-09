@@ -1,3 +1,14 @@
+<!-- Database Configuration File -->
+<?php
+session_start();
+require_once('config.php');
+$name=$_SESSION['name'];
+$surname=$_SESSION['surname'];
+$email=$_SESSION['email'];
+$birthdate=$_SESSION['birthdate'];
+$sexo=$_SESSION['sexo'];
+$following=json_decode(base64_decode($_SESSION['following']));
+?>
 <!doctype html>
 
 <html lang="es">
