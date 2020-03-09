@@ -50,16 +50,26 @@ $following=json_decode(base64_decode($_SESSION['following']));
                 <h5>Red Social para el Máster en Formación del Profesorado</h5>
                 <p></p>
                 <?php
-                    $name=$_GET['name'];
-                    $surname=$_GET['surname'];
-                    $email=$_GET['email'];
-                    $birthdate=$_GET['birthdate'];
-                    $sexo=$_GET['sexo'];
                     echo '<p><strong>Nombre:</strong> '.$name.'</p>';
                     echo '<p><strong>Apellidos:</strong> '.$surname.'</p>';
                     echo '<p><strong>Email:</strong> '.$email.'</p>';
                     echo '<p><strong>Fecha de nacimiento:</strong> '.$birthdate.'</p>';
                     echo '<p><strong>Sexo:</strong> '.$sexo.'</p>';
+                    echo '<p><strong>Siguiendo:</strong> ';
+                    if (count($following) > 1){
+                        foreach ($following as $i=>$v) {
+                            if ($i<count($following)-1)
+                                echo $v. ', ';
+                            else
+                                echo $v;
+                        }
+                        echo '</p>';
+                    }
+                    elseif (count($following) == 1){
+                        echo $following[0];
+                        echo '</p>';
+                    }
+                ?>
                 ?>
             </div>
             <!-- Register Form -->
