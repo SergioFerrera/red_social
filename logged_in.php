@@ -128,6 +128,20 @@ $following=json_decode(base64_decode($_SESSION['following']));
                         <button class="btn btn-dark" type="submit" name="send_post">Enviar!</button>
                     </div>
                 </form>
+                <?php
+                    if(isset($_POST['send_post'])){
+                        $post = $_POST['post'];
+                        $sql = "INSERT INTO posts (email, post) VALUES(?,?)";
+                        $stmtinsert = $db->prepare($sql);
+                        $result = $stmtinsert->execute([$email,$post]);
+                        if($result){
+                            echo '<div class="alert alert-success" role="alert">Se ha añadido correctamente el post.</div>';
+                        }
+                        else{
+                            echo '<div class="alert alert-danger" role="alert">Ha habido un error durante la adición del post.</div>';
+                        }
+                    }
+                ?>
             </div>
         </div>
     </div>
