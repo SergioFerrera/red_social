@@ -144,6 +144,88 @@ $following=json_decode(base64_decode($_SESSION['following']));
                         }
                     }
                 ?>
+                <?php
+                    $sql = "SELECT * FROM posts WHERE email = ?";
+                    $stmselect = $db->prepare($sql);
+                    $result = $stmselect->execute([$email]);
+                    if($result){
+                        if($stmselect->rowCount()>0){
+                            echo '<h5>Propias:</h5>';
+                            while ($row = $stmselect->fetch(PDO::FETCH_ASSOC)){
+                                echo '<div class="card">';
+                                echo '<div class="card-body">';
+                                echo '<p class="card-text">'.$row["post"].'</p>';
+                                echo '</div>';
+                                echo '</div>';
+                                echo '<p></p>';
+                            }
+                        }
+                    }
+                    else{
+                        echo '<div class="alert alert-danger" role="alert">Ha habido un error durante la obtención de las publicaciones propias.</div>';
+                    }
+                    if(gettype($following)=='array'){
+                        if (count($following) > 0){
+                            $following_emails=[];
+                            foreach ($following as $v) {
+                                $sql = "SELECT email FROM users WHERE name = ?";
+                                $stmselect = $db->prepare($sql);
+                                $result = $stmselect->execute([$v]);
+                                if($result){
+                                    if($stmselect->rowCount()>0){
+                                        while ($row = $stmselect->fetch(PDO::FETCH_ASSOC)){
+                                            array_push($following_emails,$row["email"]);
+                                        }
+                                    }
+                                    else{
+                                        echo '<div class="alert alert-danger" role="alert">No existen emails en la base de datos de los usuarios que se siguen.</div>';
+                                    }
+                                }
+                                else{
+                                    echo '<div class="alert alert-danger" role="alert">Ha habido un error durante la obtención de emails de usuarios que se siguen.</div>';
+                                }
+                            }
+                            $chivato=0;
+                            foreach ($following_emails as $i=>$v) {
+                                $sql = "SELECT * FROM posts WHERE email = ?";
+                                $stmselect = $db->prepare($sql);
+                                $result = $stmselect->execute([$v]);
+                                if($result){
+                                    if($stmselect->rowCount()>0){
+                                        $chivato+=1;
+                                    }
+                                }
+                                else{
+                                    echo '<div class="alert alert-danger" role="alert">Ha habido un error durante la obtención de las publicaciones de los usuarios que se siguen.</div>';
+                                }
+                            }
+                            if ($chivato>0){
+                                echo '<h5>Usuarios que sigo:</h5>';
+                            }
+                            foreach ($following_emails as $i=>$v) {
+                                $sql = "SELECT * FROM posts WHERE email = ?";
+                                $stmselect = $db->prepare($sql);
+                                $result = $stmselect->execute([$v]);
+                                if($result){
+                                    if($stmselect->rowCount()>0){
+                                        while ($row = $stmselect->fetch(PDO::FETCH_ASSOC)){
+                                            echo '<div class="card">';
+                                            echo '<div class="card-body">';
+                                            echo '<h5 class="card-title">'.$following[$i].'</h5>';
+                                            echo '<p class="card-text">'.$row["post"].'</p>';
+                                            echo '</div>';
+                                            echo '</div>';
+                                            echo '<p></p>';
+                                        }
+                                    }
+                                }
+                                else{
+                                    echo '<div class="alert alert-danger" role="alert">Ha habido un error durante la obtención de las publicaciones de los usuarios que se siguen.</div>';
+                                }
+                            }
+                        }
+                    }
+                ?>
             </div>
         </div>
     </div>
