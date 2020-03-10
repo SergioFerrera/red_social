@@ -56,18 +56,20 @@ $following=json_decode(base64_decode($_SESSION['following']));
                     echo '<p><strong>Fecha de nacimiento:</strong> '.$birthdate.'</p>';
                     echo '<p><strong>Sexo:</strong> '.$sexo.'</p>';
                     echo '<p><strong>Siguiendo:</strong> ';
-                    if (count($following) > 1){
-                        foreach ($following as $i=>$v) {
-                            if ($i<count($following)-1)
-                                echo $v. ', ';
-                            else
-                                echo $v;
+                    if(gettype($following)=='array'){
+                        if (count($following) > 1){
+                            foreach ($following as $i=>$v) {
+                                if ($i<count($following)-1)
+                                    echo $v. ', ';
+                                else
+                                    echo $v;
+                            }
+                            echo '</p>';
                         }
-                        echo '</p>';
-                    }
-                    elseif (count($following) == 1){
-                        echo $following[0];
-                        echo '</p>';
+                        elseif (count($following) == 1){
+                            echo $following[0];
+                            echo '</p>';
+                        }
                     }
                 ?>
                 <form action="logged_in.php" method="post">
