@@ -72,27 +72,27 @@ $following=json_decode(base64_decode($_SESSION['following']));
                 ?>
                 <form action="logged_in.php" method="post">
                     <div class="form-group">
-                    <label for="followings">Sigue a gente!:</label>
-                    <select name="followings[]" multiple class="form-control" required>
-                    <?php
-                        $sql = "SELECT id, name FROM users WHERE email != ?";
-                        $stmselect = $db->prepare($sql);
-                        $result = $stmselect->execute([$email]);
-                        if($result){
-                            if($stmselect->rowCount()>0){
-                                while ($row = $stmselect->fetch(PDO::FETCH_ASSOC)){
-                                    echo '<option>'.$row["name"].'</option>';
+                        <label for="followings">Sigue a gente!:</label>
+                        <select name="followings[]" multiple class="form-control" required>
+                        <?php
+                            $sql = "SELECT id, name FROM users WHERE email != ?";
+                            $stmselect = $db->prepare($sql);
+                            $result = $stmselect->execute([$email]);
+                            if($result){
+                                if($stmselect->rowCount()>0){
+                                    while ($row = $stmselect->fetch(PDO::FETCH_ASSOC)){
+                                        echo '<option>'.$row["name"].'</option>';
+                                    }
+                                }
+                                else{
+                                    echo '<option>No existen más usuarios en la red social.</option>';
                                 }
                             }
                             else{
-                                echo '<option>No existen más usuarios en la red social.</option>';
+                                echo '<option>Ha habido un error durante la carga.</option>';
                             }
-                        }
-                        else{
-                            echo '<option>Ha habido un error durante la carga.</option>';
-                        }
-                    ?>
-                    </select>
+                        ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-dark" type="submit" name="follow">Seguir!</button>
@@ -119,6 +119,29 @@ $following=json_decode(base64_decode($_SESSION['following']));
             <div class="col-lg">
                 <h2>Publicaciones</h2>
                 <p></p>
+                <form action="logged_in.php" method="post">
+                    <div class="form-group">
+                        <label for="post">Añade un nuevo post!:</label>
+                        <textarea class="form-control" name="post" rows="3" maxlength="500"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-dark" type="submit" name="send_post">Enviar!</button>
+                    </div>
+                </form>
+                <?php
+                    if(isset($_POST['send_post'])){
+                        $post = $_POST['post'];
+                        $sql = "INSERT INTO posts (email, post) VALUES(?,?)";
+                        $stmtinsert = $db->prepare($sql);
+                        $result = $stmtinsert->execute([$email,$post]);
+                        if($result){
+                            echo '<div class="alert alert-success" role="alert">Se ha añadido correctamente el post.</div>';
+                        }
+                        else{
+                            echo '<div class="alert alert-danger" role="alert">Ha habido un error durante la adición del post.</div>';
+                        }
+                    }
+                ?>
             </div>
         </div>
     </div>
