@@ -71,7 +71,7 @@ session_start();
                 <!-- Pattern is a regular expression for email input -->
                 <input class="form-control mr-sm-2" type="email" placeholder="Email" aria-label="email_login"
                     name="email_login"
-                    pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+                    pattern="^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$"
                     required>
                 <input class="form-control mr-sm-2" type="password" placeholder="Contraseña" aria-label="password_login"
                     name="pass_login" required>
